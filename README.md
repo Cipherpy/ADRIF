@@ -155,7 +155,7 @@ Basic **Ultralytics YOLO training**
 ```bash
 python src/train.py
 ```
-####`src/train_oversampling.py` + `src/imbalance_trainer.py`
+#### `src/train_oversampling.py` + `src/imbalance_trainer.py`
 
 Training with **class-imbalance aware oversampling** using a `WeightedRandomSampler`.
 
@@ -177,7 +177,7 @@ These mechanisms help reduce overfitting to extremely rare classes while improvi
 
 ---
 
-### `src/predict.py`
+#### `src/predict.py`
 
 Run prediction on a **single image** and save an annotated output.
 
@@ -186,7 +186,7 @@ python src/predict.py
 ```
 
 
-### `src/nms_original_pred.py`
+#### `src/nms_original_pred.py`
 
 Run YOLO on a folder of test images and save:
 
@@ -199,7 +199,7 @@ python src/nms_original_pred.py
 ```
 ## Fusion
 
-### `src/wbf.py`
+#### `src/wbf.py`
 
 Fuse YOLO-format predictions from two models using **Weighted Box Fusion (WBF)**.
 
@@ -208,7 +208,7 @@ python src/wbf.py
 ```
 ## Distance-Aware Refinement
 
-### `src/sort_images.py`
+#### `src/sort_images.py`
 
 Splits images into `distant/` vs `normal/` using:
 
@@ -219,7 +219,7 @@ Splits images into `distant/` vs `normal/` using:
 ```bash
 python src/sort_images.py
 ```
-### `src/final.py`
+#### `src/final.py`
 
 Core **ADRIF post-processing**:
 
@@ -231,3 +231,80 @@ Core **ADRIF post-processing**:
 ```bash
 python src/final.py
 ```
+
+## Evaluation
+
+#### `src/test_metrics.py`
+
+Evaluate a trained model on the **in-distribution test split**.
+
+```bash
+python src/test_metrics.py
+```
+
+## Dataset Utilities
+
+---
+
+#### `src/vgg2yolo.py`
+
+Convert **VIA (VGG Image Annotator)** JSON annotations to YOLO labels.
+
+Also generates:
+
+- `classes.txt`
+- `data.yaml`
+
+```bash
+python src/vgg2yolo.py
+```
+#### `src/gt_visualisation.py`
+
+Visualize YOLO format bounding box annotations. 
+
+```bash
+python src/gt_visualisation.py
+```
+#### `src/count_img_with_species.py`
+
+Counts the number of images with each species in the dataset.
+
+```bash
+python src/count_img_with_species.py
+```
+
+#### `src/count_species_inst.py`
+
+Counts the number of instances of each species in the dataset.  
+
+```bash
+python src/count_species_inst.py
+``` 
+#### `src/data_statistics.py`
+
+Prints statistics about the dataset.
+
+```bash
+python src/data_statistics.py
+```
+## Notes & gotchas
+
+### Hard-coded paths
+Most scripts currently use **hard-coded absolute paths** (e.g., `/home/reshma/...`). You’ll want to edit the config variables at the top of each script before running.
+
+### Prediction text format
+The prediction text files are in the format `<class_id> <x_center> <y_center> <width> <height>`, where `<class_id>` is the integer ID of the class, `<x_center>` and `<y_center>` are the center coordinates of the bounding box, `<width>` and `<height>` are the width and height of the bounding box.
+### Empty predictions
+If a prediction file is empty, it will be skipped.
+
+### Repo hygiene
+- if you see src/__pycache__/ tracked, consider removing it from the repo.and adding to .gitignore
+
+## Acknowledgements
+
+- ultralytics/yolov8
+- ensemble-boxes (Weighted Box Fusion)
+
+## License
+
+MIT -- see LICENSE
