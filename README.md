@@ -139,3 +139,36 @@ A typical end-to-end run looks like:
 5. **Evaluate performance**
    - In-distribution test set  
    - Out-of-Distribution (OOD) dataset
+
+
+## Scripts
+
+### Training
+
+---
+
+### `src/train.py`
+
+Basic **Ultralytics YOLO training**  
+(uses `yolo11n.pt` by default)
+
+```bash
+python src/train.py
+```
+### `src/train_oversampling.py` + `src/imbalance_trainer.py`
+
+Training with **class-imbalance aware oversampling** using a `WeightedRandomSampler`.
+
+> ⚠️ The oversampling components are integrated and used within `train.py`.
+
+#### Key ideas implemented:
+
+- Determine a **per-image dominant class**
+- Combine rarity from:
+  - Image counts (**primary weighting**)
+  - Instance counts (**secondary weighting**)
+- Apply:
+  - Smoothing (`power < 1`)
+  - Upper cap (`max_ratio`)
+
+These mechanisms help reduce overfitting to extremely rare classes while improving minority class representation during training.
