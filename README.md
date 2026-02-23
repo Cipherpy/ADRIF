@@ -147,7 +147,7 @@ A typical end-to-end run looks like:
 
 ---
 
-### `src/train.py`
+#### `src/train.py`
 
 Basic **Ultralytics YOLO training**  
 (uses `yolo11n.pt` by default)
@@ -155,7 +155,7 @@ Basic **Ultralytics YOLO training**
 ```bash
 python src/train.py
 ```
-### `src/train_oversampling.py` + `src/imbalance_trainer.py`
+####`src/train_oversampling.py` + `src/imbalance_trainer.py`
 
 Training with **class-imbalance aware oversampling** using a `WeightedRandomSampler`.
 
@@ -172,3 +172,62 @@ Training with **class-imbalance aware oversampling** using a `WeightedRandomSamp
   - Upper cap (`max_ratio`)
 
 These mechanisms help reduce overfitting to extremely rare classes while improving minority class representation during training.
+
+## Inference + Export Predictions
+
+---
+
+### `src/predict.py`
+
+Run prediction on a **single image** and save an annotated output.
+
+```bash
+python src/predict.py
+```
+
+
+### `src/nms_original_pred.py`
+
+Run YOLO on a folder of test images and save:
+
+- Annotated images  
+- YOLO-format prediction `.txt` files (with confidence included)  
+- A pickle file containing all predictions  
+
+```bash
+python src/nms_original_pred.py
+```
+## Fusion
+
+### `src/wbf.py`
+
+Fuse YOLO-format predictions from two models using **Weighted Box Fusion (WBF)**.
+
+```bash
+python src/wbf.py
+```
+## Distance-Aware Refinement
+
+### `src/sort_images.py`
+
+Splits images into `distant/` vs `normal/` using:
+
+- The **75th percentile** of predicted bounding box area ratios
+- A threshold `area_threshold_ratio`  
+  (default: `0.005` → 0.5% of image area)
+
+```bash
+python src/sort_images.py
+```
+### `src/final.py`
+
+Core **ADRIF post-processing**:
+
+- Classifies each image as **distant** or **normal**
+- Removes redundant contained boxes using different thresholds per group
+- Writes filtered `.txt` predictions
+- Copies images to corresponding output folders
+
+```bash
+python src/final.py
+```
