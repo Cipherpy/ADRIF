@@ -106,3 +106,16 @@ model_data/
 ├─ ├─ images/
 ├─ ├─ labels/
 ```
+## Example `data.yaml`
+
+```yaml
+path: /absolute/path/to/model_data
+train: train/images
+val: val/images
+test: test/images
+
+names:
+  0: Globicephala macrorhynchus
+  1: Stenella longirostris
+  2: Balaenoptera musculus
+```
