@@ -89,6 +89,7 @@ python -m pip install -U pip
 
 # Core dependencies used in src/
 pip install ultralytics torch opencv-python numpy ensemble-boxes pyyaml pillow
+```
 
 
 ## Dataset Format
