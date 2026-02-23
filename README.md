@@ -119,3 +119,23 @@ names:
   1: Stenella longirostris
   2: Balaenoptera musculus
 ```
+
+## Quickstart Pipeline
+
+A typical end-to-end run looks like:
+
+1. **Train YOLO**  
+   (baseline or oversampling trainer)
+
+2. **Run inference** on the test set  
+   Export YOLO-format prediction `.txt` files
+
+3. **Fuse predictions**  
+   Combine outputs from multiple models using **Weighted Box Fusion (WBF)**
+
+4. **Apply ADRIF distance-aware refinement**  
+   Separate *distant* vs *normal* detections and refine overlapping boxes
+
+5. **Evaluate performance**
+   - In-distribution test set  
+   - Out-of-Distribution (OOD) dataset
