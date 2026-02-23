@@ -70,3 +70,21 @@ ADRIF/
 │  └─ data_statistics.py
 ├─ LICENSE
 └─ README.md
+
+## Installation
+
+Create a virtual environment and install the dependencies used by the scripts:
+
+```bash
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+# macOS / Linux
+source .venv/bin/activate
+
+python -m pip install -U pip
+
+# Core dependencies used in src/
+pip install ultralytics torch opencv-python numpy ensemble-boxes pyyaml pillow
