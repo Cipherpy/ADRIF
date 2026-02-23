@@ -58,11 +58,9 @@ ADRIF/
 │  ├─ imbalance_trainer.py
 │  ├─ nms_original_pred.py
 │  ├─ wbf.py
-│  ├─ yolo_wbf.py
 │  ├─ sort_images.py
 │  ├─ final.py
 │  ├─ test_metrics.py
-│  ├─ evaluate_ood.py
 │  ├─ vgg2yolo.py
 │  ├─ gt_visualisation.py
 │  ├─ count_img_with_species.py
